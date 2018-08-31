@@ -8,6 +8,7 @@ services:
     slim:
         image: php:7-alpine
         working_dir: /var/www
+        command: /var/www/provision.sh
         command: php -S 0.0.0.0:8080 -t public
         environment:
             docker: "true"

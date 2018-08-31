@@ -21,6 +21,6 @@ class KafkaProducerController extends BaseController
             ->produce();
 
 
-        return $response->write("success");
+        return $response->write($data['payload']);
     }
 }
