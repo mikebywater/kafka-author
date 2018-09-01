@@ -16,3 +16,5 @@ $app->get('/consume', function (Request $request, Response $response, array $arg
 });
 
 $app->post('/', \Author\Controllers\KafkaProducerController::class);
+
+$app->post('/consume', \Author\Controllers\KafkaConsumerController::class);

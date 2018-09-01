@@ -23,49 +23,78 @@
                 <label for="broker">Broker IP / Address</label>
                 <input type="text" placeholder="eg. 192.168.10.10" id="broker" name="broker">
             </div>
+        </div>
+        <div class="col-6 col">
             <div class="form-group">
                 <label for="topic">Topic Name</label>
                 <input type="text" placeholder="eg. newTopic" id="topic" name="topic">
             </div>
-        </div>
-        <div class="col-6 col">
-            <kbd>{ "name" : "jdskfjhskjdfh" }</kbd>
+            <button id="start" class="btn-success">Start</button>
+            <button id="stop" class="btn-danger">Stop</button>
         </div>
     </div>
-
 </div>
-
+<br>
+<div class="paper container">
+    <pre id="console"></pre>
+</div>
 
 </body>
 <style>
     .logo{
         height:200px;
     }
+    #console{
+        width: auto;
+        background-color: #41403e;
+        color: limegreen;
+    }
+    #stop{
+        display: none;
+    }
 </style>
 <script>
     $(document).ready(function() {
+        var tid;
+
+
         $(window).on("unload", function(e) {
             saveSettings();
         });
         loadSettings();
-        $('#submit').click(function(){
-            $.post( "/", $( "#form :input" ).serialize() )
-                .success(function( data ) {
-                    alert( "Data Loaded: " + data );
-                });
+        $('#start').click(function(){
+            $('#start').hide();
+            $('#stop').show();
+            tid = setInterval(consume, 3000);
+        })
+        $('#stop').click(function(){
+            $('#start').show();
+            $('#stop').hide();
+            clearInterval(tid);
         })
     });
 
-    function loadSettings() {
-        $('#topic').val(localStorage.topic);
-        $('#broker').val(localStorage.broker);
-        $('#payload').val(localStorage.payload);
+    function consume()
+    {
+        $.post( "/consume", $( "#form :input" ).serialize() )
+            .done(function( data ) {
+                var d = new Date();
+                if(data){
+                    $('#console').prepend(d + " <br>" + data + "<br><br>");
+                }
+            });
     }
 
-    function saveSettings() {
+    function loadSettings()
+    {
+        $('#topic').val(localStorage.topic);
+        $('#broker').val(localStorage.broker);
+    }
+
+    function saveSettings()
+    {
         localStorage.broker = $('#broker').val();
         localStorage.topic = $('#topic').val();
-        localStorage.payload = $('#payload').val();
     }
 </script>
 </html>
