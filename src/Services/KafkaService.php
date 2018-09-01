@@ -40,7 +40,7 @@ class KafkaService
     public function consume()
     {
         $conf = new \RdKafka\Conf();
-        $conf->set('group.id', 'author');
+        $conf->set('group.id', 'mike');
         $rk = new \RdKafka\Consumer($conf);
         $rk->addBrokers($this->broker);
         $topic = $rk->newTopic($this->topic);
