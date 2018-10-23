@@ -15,5 +15,5 @@ class HomepageTest extends BaseTestCase
         $this->assertContains('Kafka', (string)$response->getBody());
         $this->assertNotContains('Hello', (string)$response->getBody());
     }
-    
+
 }
