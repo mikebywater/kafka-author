@@ -7,11 +7,13 @@ use Slim\Http\Response;
 
 $app->get('/', function (Request $request, Response $response, array $args) {
     // Render index view
+    $this->renderer->setLayout("layout.phtml");
     return $this->renderer->render($response, 'index.phtml', $args);
 });
 
 $app->get('/consume', function (Request $request, Response $response, array $args) {
-    // Render index view
+    // Render consumer
+    $this->renderer->setLayout("layout.phtml");
     return $this->renderer->render($response, 'consume.phtml', $args);
 });
 

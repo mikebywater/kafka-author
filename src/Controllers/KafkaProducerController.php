@@ -10,8 +10,7 @@ class KafkaProducerController extends BaseController
 {
 
     public function __invoke(Request $request, Response $response, $args) {
-        // your code
-        // to access items in the container... $this->container->get('');
+
         $data = $request->getParsedBody();
 
         $service = new KafkaService();
