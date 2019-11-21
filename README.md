@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/mikebywater/kafka-author/master/public/assets/images/author.png)
+# Kafka Author
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/96e04c67f5634700bfb89766c2589346)](https://app.codacy.com/app/mikebywater/kafka-author?utm_source=github.com&utm_medium=referral&utm_content=mikebywater/kafka-author&utm_campaign=Badge_Grade_Dashboard)
 
