@@ -29,12 +29,12 @@ When producing there is a limited ability to create fake data. The following sub
 
 ```php
 !!NAME!!       // returns as full name eg. Mike Bywater
-!!FIRST_NAME!! // returns a typically mundane first name eg. Tom
-!!LAST_NAME!!  // returns a name that is clearly supposed to be a last name eg. Beckhem
+!!FIRST_NAME!! // returns a first name eg. Tom
+!!LAST_NAME!!  // returns a surname eg. Barnes
 
 !!NUMBER!!     // returns a single digit eg. 1
 
-!!STREET!!     // returns a street name eg. Cock Lane
+!!STREET!!     // returns a street name eg. Coach Lane
 !!POSTCODE!!   // returns a UK postcode eg. MK9 3NZ
  
 ```
