@@ -10,7 +10,7 @@ $(document).ready(function() {
         $('#start').hide();
         $('#stop').show();
         tid = setInterval(consume, 3000);
-    })
+    });
     $('#stop').click(function(){
         $('#start').show();
         $('#stop').hide();

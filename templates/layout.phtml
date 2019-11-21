@@ -14,6 +14,8 @@
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+        <!-- Vendor js -->
+        <script src="/assets/js/vendor.min.js"></script>
 
     </head>
 
@@ -39,18 +41,12 @@
                             <!-- End mobile menu toggle-->
                         </li>
 
-                        <li class="dropdown d-none d-lg-block">
+                      <li class="dropdown d-none d-lg-block">
                             <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                kafka.enta.net
+                                kafka.example.com
                                 <i class="mdi mdi-chevron-down"></i>
                             </a>
                             <div class="dropdown-menu">
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <i class="fe-briefcase mr-1"></i>
-                                    <span>kafka.enta.cloud</span>
-                                </a>
-
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
                                     <i class="fe-user mr-1"></i>
@@ -70,7 +66,7 @@
                             </span>
                             <span class="logo-sm">
                                 <!-- <span class="logo-sm-text-dark">X</span> -->
-                                <img src="/assets/images/logo-sm.png" alt="" height="24">
+                                <img src="/assets/images/author.png" alt="" height="24">
                             </span>
                         </a>
                     </div>
@@ -91,15 +87,15 @@
                         <ul class="navigation-menu">
 
                             <li>
-                                <a href="index.html">  <i class="remixicon-honour-line"></i>Produce</a>
+                                <a href="/">  <i class="fas fa-cookie"></i>Produce</a>
                             </li>
                             <li>
-                                <a href="dashboard-2.html">Consume</a>
+                                <a href="/consume"> <i class="fas fa-cookie-bite"></i>Consume</a>
                             </li>
 
                             <li class="has-submenu">
                                 <a href="#">
-                                    <i class="remixicon-honour-line"></i>Components <div class="arrow-down"></div>
+                                    <i class="remixicon-file-copy-2-line"></i>Topics <div class="arrow-down"></div>
                                 </a>
                                 <ul class="submenu">
                                     <li class="has-submenu">
@@ -273,16 +269,6 @@
         <div class="wrapper">
             <div class="container-fluid">
 
-                <!-- start page title -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="page-title-box">
-                            <h4 class="page-title">Producer</h4>
-                        </div>
-                    </div>
-                </div>     
-                <!-- end page title -->
-
                 <?=$content?>
 
                 
@@ -293,14 +279,16 @@
         <!-- ============================================================== -->
         <!-- End Page content -->
         <!-- ============================================================== -->
-
-
-        <!-- Vendor js -->
-        <script src="/assets/js/vendor.min.js"></script>
-
-        <!-- App js -->
-        <script src="/assets/js/app.min.js"></script>
-        <script src="/js/producer.js"></script>
         
     </body>
+    <style>
+        #console{
+            width: auto;
+            background-color: #41403e;
+            color: limegreen;
+        }
+        #stop{
+            display: none;
+        }
+    </style>
 </html>

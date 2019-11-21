@@ -12,7 +12,8 @@ $app->get('/', function (Request $request, Response $response, array $args) {
 });
 
 $app->get('/consume', function (Request $request, Response $response, array $args) {
-    // Render index view
+    // Render consumer
+    $this->renderer->setLayout("layout.phtml");
     return $this->renderer->render($response, 'consume.phtml', $args);
 });
 
