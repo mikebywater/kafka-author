@@ -1,7 +1,6 @@
 $(document).ready(function() {
     var tid;
 
-
     $(window).on("unload", function(e) {
         saveSettings();
     });
@@ -9,13 +8,13 @@ $(document).ready(function() {
     $('#start').click(function(){
         $('#start').hide();
         $('#stop').show();
-        tid = setInterval(consume, 3000);
+        tid = setInterval(consume, 2000);
     });
     $('#stop').click(function(){
         $('#start').show();
         $('#stop').hide();
         clearInterval(tid);
-    })
+    });
 });
 
 function consume()
