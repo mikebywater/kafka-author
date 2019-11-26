@@ -31,11 +31,13 @@ When producing there is a limited ability to create fake data. The following sub
 !!NAME!!       // returns as full name eg. Mike Bywater
 !!FIRST_NAME!! // returns a first name eg. Tom
 !!LAST_NAME!!  // returns a surname eg. Barnes
+!!EMAIL!!      // returns an email eg. mike.bywater@cityfibre.com
 
 !!NUMBER!!     // returns a single digit eg. 1
 
 !!STREET!!     // returns a street name eg. Coach Lane
 !!POSTCODE!!   // returns a UK postcode eg. MK9 3NZ
+!!CITY!!       // returns a city eg. Milton keynes
  
 ```
 

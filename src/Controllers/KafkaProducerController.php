@@ -1,28 +1,38 @@
 <?php
-
 namespace Author\Controllers;
 
-use Author\Services\FakerService;
 use Author\Services\KafkaService;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
+/**
+ * Class KafkaProducerController
+ *
+ * @category Producer
+ * @package Author\Controllers
+ */
 class KafkaProducerController extends BaseController
 {
-
-    public function __invoke(Request $request, Response $response, $args) {
-
+    /**
+     * Produce the specified Kafka event on given topic and payload.
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param array $args
+     *
+     * @return Response
+     */
+    public function __invoke(Request $request, Response $response, array $args)
+    {
         $data = $request->getParsedBody();
 
-        $fakerService = new FakerService($data['payload']);
-        $data['payload'] = $fakerService->parseAll();
         $service = new KafkaService();
-        $service->payload($data['payload'])
+
+        $result = $service->payload($data['payload'])
             ->broker($data['broker'])
             ->topic($data['topic'])
-            ->produce();
+            ->produce($data['amount']);
 
-
-        return $response->write($data['payload']);
+        return $response->write(json_encode($result));
     }
 }

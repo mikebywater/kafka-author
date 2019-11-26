@@ -1,0 +1,11 @@
+.console{
+    padding:20px !important;
+    overflow: auto !important;
+}
+.recent_events {
+    overflow: auto !important;
+    margin:0 !important;
+}
+.link_active {
+    color:#3b73da !important;
+}
