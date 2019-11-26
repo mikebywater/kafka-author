@@ -102,10 +102,15 @@ function loadTopic(topic) {
     $('#payload').val(localStorage['p_' + topic]);
 }
 
-function getFormattedDate() {
-
+function getFormattedDate()
+{
     var date = new Date();
-    return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " @ " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " @ " +  add_leading_zeros(date.getHours()) + ":" + add_leading_zeros(date.getMinutes()) + ":" + add_leading_zeros(date.getSeconds());
+}
+
+function add_leading_zeros(digit)
+{
+    return (digit < 10 ? '0' : '') + digit;
 }
 
 function changeSubmitState(bool)
