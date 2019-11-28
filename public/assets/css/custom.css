@@ -1,0 +1,19 @@
+.console {
+    padding:20px !important;
+    overflow: auto !important;
+}
+.console_consume {
+    padding:20px !important;
+    overflow: auto !important;
+    max-height: 400px;
+}
+.recent_events {
+    overflow: auto !important;
+    margin:0 !important;
+}
+.link_active {
+    color:#3b73da !important;
+}
+.form-control:read-only {
+    background-color:#f5f6f8;
+}

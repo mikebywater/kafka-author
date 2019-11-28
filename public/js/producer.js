@@ -1,26 +1,91 @@
 $(document).ready(function() {
+
     $(window).on("unload", function(e) {
         saveSettings();
     });
+
     loadSettings();
-    $('#submit').click(function(){
-        $.post( "/", $( "#form :input" ).serialize() )
-            .done(function( data ) {
-                var d = new Date();
-                $('#console').prepend(d + " Payload Successfully Sent<br>" + data + "<br><br>");
-                saveSettings();
+
+    $('#submit').click(function() {
+
+        changeSubmitState(true)
+
+        $( "#form :input" ).each(function() {
+
+            if (this.value === "" && this.id !== "submit") {
+
+                var message = "Please set a " + this.id;
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: message,
+                });
+
+                changeSubmitState(false)
+
+                throw message;
+            }
+        });
+
+        if ($("#amount").val() > 10) {
+
+            var message = "Cannot send more than 10 events at once.";
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: message,
             });
+
+            changeSubmitState(false)
+
+            throw message;
+        }
+
+        $.post( "/", $( "#form :input" ).serialize())
+        .done(function( data ) {
+
+            data = JSON.parse(data);
+
+            data.forEach(function (payload) {
+
+                $('#console').prepend("Payload successfully sent with topic '" + $('#topic').val() + "' and broker '" + $('#broker').val() + "' on " + getFormattedDate() + "<br>" + payload + "<br><br>");
+            });
+
+            changeSubmitState(false)
+
+        }).fail(function(e) {
+
+            console.log(e);
+
+            changeSubmitState(false)
+        });
+
+        saveSettings();
     });
-    $(".topic-name").click(function(e){
+
+    $(".topic-name").click(function(e) {
+
         e.preventDefault();
+
         loadTopic($(this).html());
     });
+
 });
 
 function loadSettings() {
+
+    var height = $("#send_event").css("height");
+    $("#topics").css("max-height",height);
+    $("#topics").css("height",height);
+    $("#console").css("max-height",height);
+
     $('#topic').val(localStorage.topic);
     $('#broker').val(localStorage.broker);
     $('#payload').val(localStorage.payload);
+    $('#amount').val(localStorage.amount);
+
     if(localStorage.topics){
         var topics =  JSON.parse(localStorage.topics);
     }else{
@@ -37,24 +102,57 @@ function loadTopic(topic) {
     $('#payload').val(localStorage['p_' + topic]);
 }
 
-function saveSettings() {
+function getFormattedDate()
+{
+    var date = new Date();
+    return date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " @ " +  add_leading_zeros(date.getHours()) + ":" + add_leading_zeros(date.getMinutes()) + ":" + add_leading_zeros(date.getSeconds());
+}
+
+function add_leading_zeros(digit)
+{
+    return (digit < 10 ? '0' : '') + digit;
+}
+
+function changeSubmitState(bool)
+{
+    var submit = $("#submit");
+
+    if(bool) {
+        submit.html("Processing...");
+    } else {
+        submit.html("Submit");
+    }
+
+    submit.prop("disabled",bool);
+}
+
+function saveSettings()
+{
     var broker = $('#broker').val();
     var topic = $('#topic').val();
     var payload = $('#payload').val();
-    if(localStorage.topics){
+    var amount = $("#amount").val();
+
+    if (localStorage.topics) {
+
         var topics =  JSON.parse(localStorage.topics);
-    }else{
+    } else {
+
         var topics = [];
     }
-    console.log(topics.indexOf(topic));
-    if(topics.indexOf(topic) === -1){
+
+    if (topics.indexOf(topic) === -1) {
+
         topics.push(topic);
+
         $('#topics').append("<li><a href='#' class='topic-name'>" + topic + "</a></li>");
     }
+
     localStorage.topics = JSON.stringify(topics);
     localStorage.broker = broker;
     localStorage.topic = topic;
     localStorage.payload = payload;
+    localStorage.amount = amount;
 
     localStorage['t_' + topic] = topic;
     localStorage['b_' + topic] = broker;

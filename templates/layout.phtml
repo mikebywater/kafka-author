@@ -14,8 +14,12 @@
         <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
         <link href="/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/css/custom.css" rel="stylesheet" type="text/css" />
+        <link href="/assets/js/sweetalert/dist/sweetalert2.min.css" rel="stylesheet" >
+
         <!-- Vendor js -->
         <script src="/assets/js/vendor.min.js"></script>
+        <script src="/assets/js/sweetalert/dist/sweetalert2.min.js"></script>
 
     </head>
 
@@ -40,8 +44,6 @@
                             </a>
                             <!-- End mobile menu toggle-->
                         </li>
-
-
                     </ul>
 
                     <!-- LOGO -->
@@ -49,10 +51,8 @@
                         <a href="index.html" class="logo text-center">
                             <span class="logo-lg">
                                 <img src="/assets/images/author.png" alt="" height="40">
-                                <!-- <span class="logo-lg-text-light">Xeria</span> -->
                             </span>
                             <span class="logo-sm">
-                                <!-- <span class="logo-sm-text-dark">X</span> -->
                                 <img src="/assets/images/author.png" alt="" height="24">
                             </span>
                         </a>
@@ -60,8 +60,8 @@
 
                     <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
 
-
                     </ul>
+
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -74,10 +74,27 @@
                         <ul class="navigation-menu">
 
                             <li>
-                                <a href="/">  <i class="fas fa-cookie"></i>Produce</a>
+                            <?php
+                            if ($page === "produce") {
+                                ?>  <a href="/" class="link_active"><i class="fas fa-cookie-bite"></i>Produce <?php
+                            } else {
+                                ?>  <a href="/"><i class="fas fa-cookie"></i>Produce<?php
+                            }
+                            ?>
+
+                                </a>
                             </li>
+
                             <li>
-                                <a href="/consume"> <i class="fas fa-cookie-bite"></i>Consume</a>
+                                    <?php
+                                    if ($page === "consume") {
+                                        ?>  <a href="/consume" class="link_active"><i class="fas fa-cookie-bite"></i>Consume <?php
+                                    } else {
+                                        ?>  <a href="/consume"><i class="fas fa-cookie"></i>Consume<?php
+                                    }
+                                    ?>
+
+                                </a>
                             </li>
 
                         </ul>
