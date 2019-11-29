@@ -6,11 +6,11 @@ services:
   app:
     image: mikebywater/kafka-author:latest
     working_dir: /var/www
-    command: 'php -S 0.0.0.0:8088 -t public'
+    command: 'php -S 0.0.0.0:8050 -t public'
     environment:
       docker: 'true'
     ports:
-      - '8088:8088'
+      - '8050:8050'
     volumes:
       - '.:/var/www'
       - 'logs:/var/www/logs'

@@ -50,7 +50,7 @@ $(document).ready(function() {
 
             data.forEach(function (payload) {
 
-                $('#console').prepend("Payload successfully sent with topic '" + $('#topic').val() + "' and broker '" + $('#broker').val() + "' on " + getFormattedDate() + "<br>" + payload + "<br><br>");
+                $('#console').prepend("Payload sent with topic '" + $('#topic').val() + "' and broker '" + $('#broker').val() + "' on " + getFormattedDate() + "<br>" + payload + "<br><br>");
             });
 
             changeSubmitState(false)
