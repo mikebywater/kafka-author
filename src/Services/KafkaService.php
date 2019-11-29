@@ -1,5 +1,10 @@
 <?php
+
 namespace Author\Services;
+
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
+use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 
 /**
  * Class KafkaService
@@ -26,7 +31,16 @@ class KafkaService
     /**
      * @param $broker
      * @return $this
+     * @throws \Exception
      */
+
+    public function __construct()
+    {
+        $this->logger = new Logger('app-log');
+        $this->logger->pushHandler(new StreamHandler( '/var/www/logs/app.log', Logger::DEBUG));
+    }
+
+
     public function broker($broker)
     {
         $this->broker = $broker;
@@ -60,11 +74,19 @@ class KafkaService
      */
     public function produce($amount)
     {
-        $rk = new \RdKafka\Producer();
+        $conf = new \RdKafka\Conf();
 
+        $conf->setErrorCb(function ($kafka, $err, $reason) {
+            throw new \Exception(rd_kafka_err2str($err) . ": " . $reason);
+        });
+
+        $rk = new \RdKafka\Producer($conf);
         $rk->addBrokers($this->broker);
 
-        $topic = $rk->newTopic($this->topic);
+        $topicConf = new \RdKafka\TopicConf();
+        $topicConf->set("message.timeout.ms", "500");
+
+        $topic = $rk->newTopic($this->topic, $topicConf);
 
         $payloads = [];
 
@@ -78,7 +100,15 @@ class KafkaService
 
             $payloads[] = $payload;
 
-            $topic->produce(RD_KAFKA_PARTITION_UA, 0, $payload);
+            try{
+                $topic->produce(RD_KAFKA_PARTITION_UA, 0, $payload);
+                $rk->poll(20);
+            }catch(\Exception $e){
+                $this->logger->log('error' , $e->getMessage());
+                $errors[] = '{"error" : "'. $e->getMessage() . '"}';
+                return $errors;
+            }
+
         }
 
         return $payloads;
