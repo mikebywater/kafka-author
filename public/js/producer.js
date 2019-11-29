@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
     $(window).on("unload", function(e) {
         saveSettings();
     });
@@ -65,9 +66,11 @@ $(document).ready(function() {
         saveSettings();
     });
 
-    $(".topic-name").click(function(e) {
+    $("html").on('click', '.topic-name' ,function(e) {
 
         e.preventDefault();
+
+        console.log("hit");
 
         loadTopic($(this).html());
     });
@@ -92,8 +95,17 @@ function loadSettings() {
         var topics = [];
     }
     for(i=0;i<topics.length;i++){
-        $('#topics').append("<li><a href='#' class='topic-name'>" + topics[i] + "</a></li>");
+        $('#topics').append("<tr><td><a href='#' class='topic-name'>" + topics[i] + "</a></td><</tr>");
     }
+
+    dtable();
+
+}
+
+function dtable() {
+    $("#basic-datatable").DataTable(
+        {"aLengthMenu": [[5, 10, 15, 20], [5, 10, 15, 20]],language:{paginate:{previous:"<i class='mdi mdi-chevron-left'>",next:"<i class='mdi mdi-chevron-right'>"}},drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination-rounded")}}
+    );
 }
 
 function loadTopic(topic) {
@@ -145,7 +157,10 @@ function saveSettings()
 
         topics.push(topic);
 
-        $('#topics').append("<li><a href='#' class='topic-name'>" + topic + "</a></li>");
+        var table = $("#basic-datatable").DataTable();
+        table.destroy();
+        $('#topics').append("<tr><td><a href='#' class='topic-name'>" + topic + "</a></td><</tr>");
+        dtable()
     }
 
     localStorage.topics = JSON.stringify(topics);
