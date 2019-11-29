@@ -58,7 +58,16 @@
             <h4 class="header-title">Recent Payloads</h4>
             <p class="sub-header">
                 List of recently sent payloads
-            <ul id="topics" class="recent_events"></ul>
+            <table id="basic-datatable" class="table dt-responsive nowrap" data-page-length='5'>
+                <thead>
+                <tr>
+                    <th>Topic Name</th>
+                </tr>
+                </thead>
+                <tbody id="topics">
+                </tbody>
+            </table>
+
         </div>
     </div>
 </div>
@@ -69,6 +78,21 @@
             <pre id="console" class="console"></pre>
     </div>
 </div>
+<script src="/assets/libs/datatables/jquery.dataTables.min.js"></script>
+<script src="/assets/libs/datatables/jquery.dataTables.min.js"></script>
+<script src="/assets/libs/datatables/dataTables.bootstrap4.js"></script>
+<script src="assets/libs/datatables/dataTables.responsive.min.js"></script>
+<script src="assets/libs/datatables/responsive.bootstrap4.min.js"></script>
+<script src="assets/libs/datatables/dataTables.buttons.min.js"></script>
+<script src="assets/libs/datatables/buttons.bootstrap4.min.js"></script>
+<script src="assets/libs/datatables/buttons.html5.min.js"></script>
+<script src="assets/libs/datatables/buttons.flash.min.js"></script>
+<script src="assets/libs/datatables/buttons.print.min.js"></script>
+<script src="assets/libs/datatables/dataTables.keyTable.min.js"></script>
+<script src="assets/libs/datatables/dataTables.select.min.js"></script>
+<script src="assets/libs/pdfmake/pdfmake.min.js"></script>
+<script src="assets/libs/pdfmake/vfs_fonts.js"></script>
+
 
 <script src="/js/producer.js"></script>
 
