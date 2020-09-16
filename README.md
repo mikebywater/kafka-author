@@ -4,23 +4,20 @@
 
 # Getting Started
 
+Clone the repository and enter the directory
+
 ```bash
-composer create-project mikebywater/kafka-author
-
-composer start
+git clone git@github.com:mikebywater/kafka-author.git
+cd kafka-author
 ```
-Navigate to
-
-`http://localhost:8088`
-
-Note you will need php with the RDKafka extension installed locally. Alternatively if you have docker compose installed you can simply run
+Bring up the containers (you will need docker and ocker-compose installed)
 
 ```bash
 docker-compose up -d
 ```
 And again, navigate to
 
-`http://localhost:8088`
+`http://localhost:8050`
 
 
 # Fake Data
